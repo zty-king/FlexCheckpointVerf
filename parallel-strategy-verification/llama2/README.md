@@ -12,7 +12,7 @@ loss 收敛趋势图需要用 ckpt1 训 50 个 step， load 成 ckpt 2 继续训
 
 * 1e-5 表示：MD5 校验通过，续训的 loss diff 精度误差在 1e-5 以内
 *  [✅] 表示：MD5 校验通过，续训的 loss 逐位对齐
-* 尝试比较不配置aoa_config的dp2->tp4，接续loss差值在1E-1~1之间
+
 
 |  | dp4 | sd4(v1) | sd4(v2) | tp4 | pp4 | vpp4 | sd2+tp2 | tp2+pp2 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

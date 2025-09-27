@@ -155,7 +155,7 @@ rm -rf $case_temp2_log_dir
 
 
 python -u -m paddle.distributed.launch \
-    --gpus "0,1" \
+    --gpus "0,1,2,3" \
     --log_dir "$case_temp2_log_dir" \
     run_pretrain.py \
     --model_name_or_path "meta-llama/Llama-2-7b" \
