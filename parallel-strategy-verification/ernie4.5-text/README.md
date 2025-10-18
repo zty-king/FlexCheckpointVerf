@@ -51,24 +51,41 @@ ernie.layers.1.mlp.gate.weight.w_0
 
 ## AOA_Check_Method
 
-### 1. 转参验证
+### 1. fused_qkv 转非 fused
 
 策略1的 ckpt 变换到策略2的 ckpt，再变换回策略1；需满足：
 - md5 与原始 ckpt 对齐；
 - 策略2热启策略1的 ckpt，能够正常接续。
-
 * 1E-5 表示：MD5 校验通过，续训的 loss diff 精度误差小于 1E-5 
-*  [✅] 表示：MD5 校验通过，续训的 loss 逐位对齐
 
+### 2. 专家合并
+
+分析合并后的expert_merge_tensor是否在设定的axis上和专家0~n逐个md5对齐。
+*  [✅] 表示：MD5 校验通过
+
+### 3. 参数重新命名
+
+在fused_qkv 转非 fused 已经涉及到，这里通过修改ernie4.5中的某层名称，测试接续loss。
+
+### 4. 层删除
+
+策略1的 ckpt 变换到策略2的 ckpt，再变换回策略1；需满足：
+- MD5 与原始 ckpt 对齐（除remove的参数张量外，其余键的 MD5 应完全一致）；
+*  [✅] 表示：MD5 校验通过
+
+### 5. 层添加
+
+加载策略1的 ckpt ，新的组网额外添加一层；需满足：
+- MD5 与原始 ckpt 对齐（除add的参数张量外，其余键的 MD5 应完全一致；新增键仅在新 ckpt 中存在）；
+*  [✅] 表示：MD5 校验通过
 
 | 模型 | 验证策略 | 验证结果 |
 | :-- | :-- | :-- |
-| EB4.5 纯文 | fused_qkv 转非 fused | DP2->DP4(1E-3)、DP2->TP4(1E-3)、TP2_to_TP4(1E-1) 、TP2_to_Sharding4_V2(1E-1)|
-| EB4.5 纯文 | 专家合并 |  |
-| EB4.5 纯文 | 专家拆分 |  |
-| EB4.5 纯文 | 参数重新命名 |  |
-| EB4.5 纯文 | 层删除 |  |
-| EB4.5 纯文 | 层添加 |  |
+| EB4.5 纯文 | fused_qkv 转非 fused | DP2->DP4(1E-3)、DP2->TP4(1E-2)、TP2_to_TP4(1E-5) 、TP2(EP)_to_Sharding4_V2(1E-2)|
+| EB4.5 纯文 | 专家合并 | ✅ |
+| EB4.5 纯文 | 参数重新命名 | DP2(1E-3) |
+| EB4.5 纯文 | 层删除 | ✅ |
+| EB4.5 纯文 | 层添加 | ✅ |
 | DeepSeek-V3 | fused_qkv 转非 fused |  |
 | DeepSeek-V3 | 专家合并 |  |
 | DeepSeek-V3 | 专家拆分 |  |

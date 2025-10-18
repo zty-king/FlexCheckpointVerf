@@ -72,20 +72,27 @@ export R1_AOA_CONFIG='{
         "ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.layers.$LAYER_ID.mlp.up_proj.weight,ernie.layers.$LAYER_ID.mlp.gate_proj.weight, fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment1_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment1_0,fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment2_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment2_0,fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.layers.$LAYER_ID.mlp.up_proj.weight.w_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.w_0,fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight,ernie.layers.$LAYER_ID.mlp.up_proj.weight, fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment1_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment2_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight.w_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.w_0,fused_ffn",
 
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight, fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment1_0,fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment2_0,fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.w_0,fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight, fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.w_0,fused_ffn",
 
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight -> ernie.layers.1.mlp.shared_experts.up_proj.weight,ernie.layers.1.mlp.shared_experts.gate_proj.weight, fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.up_proj.weight.moment1_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment1_0,fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.up_proj.weight.moment2_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment2_0,fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.up_proj.weight.w_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.w_0,fused_ffn",
+
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight -> ernie.layers.1.mlp.shared_experts.gate_proj.weight,ernie.layers.1.mlp.shared_experts.up_proj.weight, fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment1_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment2_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.gate_proj.weight.w_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.w_0,fused_ffn",
+
+
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight, fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.moment1_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.moment2_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.w_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.w_0,fused_ffn",
       ]
     }'
 
@@ -105,25 +112,32 @@ export R2_AOA_CONFIG='{
         "ernie.layers.$LAYER_ID.self_attn.q_proj.weight.moment2_0,ernie.layers.$LAYER_ID.self_attn.k_proj.weight.moment2_0,ernie.layers.$LAYER_ID.self_attn.v_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.self_attn.qkv_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.layers.$LAYER_ID.self_attn.q_proj.weight.w_0,ernie.layers.$LAYER_ID.self_attn.k_proj.weight.w_0,ernie.layers.$LAYER_ID.self_attn.v_proj.weight.w_0 -> ernie.layers.$LAYER_ID.self_attn.qkv_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
+
         "ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight -> ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.moment1_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
-        "ernie.layers.$LAYER_ID.mlp.up_proj.weight,ernie.layers.$LAYER_ID.mlp.gate_proj.weight -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight, fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment1_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment1_0 -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0, fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment2_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0, fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_proj.weight.w_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.w_0 -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.w_0, fused_ffn",
 
-        "ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight, fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0, fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0, fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.w_0, fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.gate_proj.weight,ernie.layers.$LAYER_ID.mlp.up_proj.weight -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight, fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment1_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment1_0 -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0, fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment2_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0, fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.gate_proj.weight.w_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.w_0 -> ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.w_0, fused_ffn",
 
-        "ernie.layers.1.mlp.shared_experts.up_proj.weight,ernie.layers.1.mlp.shared_experts.gate_proj.weight -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight, fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_proj.weight.moment1_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0, fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_proj.weight.moment2_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0, fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_proj.weight.w_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0, fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight, fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0, fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0, fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.w_0, fused_ffn",
+
+        "ernie.layers.1.mlp.shared_experts.gate_proj.weight,ernie.layers.1.mlp.shared_experts.up_proj.weight -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight, fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment1_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0, fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment2_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0, fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.gate_proj.weight.w_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0, fused_ffn",
+
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight->ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight, fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.moment1_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.moment1_0->ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.moment2_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.moment2_0-> ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.w_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.w_0->ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.w_0,fused_ffn",
       ]
     }'
 
@@ -144,25 +158,33 @@ export R3_AOA_CONFIG='{
         "ernie.layers.$LAYER_ID.self_attn.qkv_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.self_attn.q_proj.weight.moment2_0,ernie.layers.$LAYER_ID.self_attn.k_proj.weight.moment2_0,ernie.layers.$LAYER_ID.self_attn.v_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.layers.$LAYER_ID.self_attn.qkv_proj.weight.w_0 -> ernie.layers.$LAYER_ID.self_attn.q_proj.weight.w_0,ernie.layers.$LAYER_ID.self_attn.k_proj.weight.w_0,ernie.layers.$LAYER_ID.self_attn.v_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
+
         "ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight -> ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.moment1_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
         "ernie.mtp_block.$LAYER_ID.self_attn.qkv_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.self_attn.q_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.self_attn.k_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.self_attn.v_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.layers.$LAYER_ID.mlp.up_proj.weight,ernie.layers.$LAYER_ID.mlp.gate_proj.weight, fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment1_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment1_0,fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment2_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment2_0,fused_ffn",
-        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.layers.$LAYER_ID.mlp.up_proj.weight.w_0,ernie.layers.$LAYER_ID.mlp.gate_proj.weight.w_0,fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight,ernie.layers.$LAYER_ID.mlp.up_proj.weight, fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment1_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight.moment2_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.layers.$LAYER_ID.mlp.gate_proj.weight.w_0,ernie.layers.$LAYER_ID.mlp.up_proj.weight.w_0,fused_ffn",
 
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight, fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment1_0,fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment2_0,fused_ffn",
-        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.w_0,fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight, fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment1_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.moment2_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.mtp_block.$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.mtp_block.$LAYER_ID.mlp.gate_proj.weight.w_0,ernie.mtp_block.$LAYER_ID.mlp.up_proj.weight.w_0,fused_ffn",
 
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight -> ernie.layers.1.mlp.shared_experts.up_proj.weight,ernie.layers.1.mlp.shared_experts.gate_proj.weight, fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.up_proj.weight.moment1_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment1_0,fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.up_proj.weight.moment2_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment2_0,fused_ffn",
-        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.up_proj.weight.w_0,ernie.layers.1.mlp.shared_experts.gate_proj.weight.w_0,fused_ffn",
+
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight -> ernie.layers.1.mlp.shared_experts.gate_proj.weight,ernie.layers.1.mlp.shared_experts.up_proj.weight, fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment1_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.gate_proj.weight.moment2_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.gate_proj.weight.w_0,ernie.layers.1.mlp.shared_experts.up_proj.weight.w_0,fused_ffn",
+
+
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight, fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.moment1_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.moment1_0,fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.moment2_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.moment2_0,fused_ffn",
+        "ernie.layers.1.mlp.experts.$EXPERT_ID.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.experts.$EXPERT_ID.gate_proj.weight.w_0,ernie.layers.1.mlp.experts.$EXPERT_ID.up_proj.weight.w_0,fused_ffn",
       ]
     }'
 
