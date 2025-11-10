@@ -47,8 +47,8 @@ export R0_PIPELINE_PARALLEL_DEGREE=1
 export R0_EXPERT_PARALLEL_DEGREE=2
 export R0_SHARDING_PARALLEL_DEGREE=1
 export R0_VIRTUAL_PP_DEGREE=1
-export R0_UNIFIED_CKPT=True
-export R0_FLEX_CKPT=false
+export R0_load_checkpoint_format="unified_checkpoint"
+export R0_save_checkpoint_format="unified_checkpoint"
 
 export R1_MOE_GROUP="tp"
 export R1_DATA_PARALLEL_DEGREE=1
@@ -57,8 +57,8 @@ export R1_PIPELINE_PARALLEL_DEGREE=1
 export R1_EXPERT_PARALLEL_DEGREE=2
 export R1_SHARDING_PARALLEL_DEGREE=1
 export R1_VIRTUAL_PP_DEGREE=1
-export R1_UNIFIED_CKPT=false
-export R1_FLEX_CKPT=True
+export R1_load_checkpoint_format="flex_checkpoint"
+export R1_save_checkpoint_format="flex_checkpoint"
 
 export R2_MOE_GROUP="dummy"
 export R2_DATA_PARALLEL_DEGREE=1
@@ -67,14 +67,14 @@ export R2_PIPELINE_PARALLEL_DEGREE=1
 export R2_EXPERT_PARALLEL_DEGREE=1
 export R2_SHARDING_PARALLEL_DEGREE=4
 export R2_VIRTUAL_PP_DEGREE=1
-export R2_UNIFIED_CKPT=false
-export R2_FLEX_CKPT=True
+export R2_load_checkpoint_format="flex_checkpoint"
+export R2_save_checkpoint_format="flex_checkpoint"
 
 
 
 # 统一根目录与任务名（对齐 run_pretrain_llm.sh 的结构）
 ROOT_DIR="/home/ERNIE/examples/pre-training"
-task_name="TP2(EP2)_to_Sharding4_V2"
+task_name="TP2(EP2)_to_TP4"
 
 case_temp0_out_dir="${ROOT_DIR}/temp0/${task_name}"
 case_temp0_log_dir="${ROOT_DIR}/temp0/${task_name}_log"
@@ -107,8 +107,8 @@ run_with_yaml() {
     local EP_DEG_IN="${10}"  # expert_parallel_degree（未传入则默认 1）
     local PP_DEG_IN="${11}"  # pipeline_parallel_degree（未传入则默认 1）
     local VPP_DEG_IN="${12}" # virtual_pp_degree（未传入则默认 1）
-    local UNIFIED_CKPT_IN="${13}"   # unified_checkpoint（未传入则默认 false）
-    local FLEX_CKPT_IN="${14}"      # using_flex_checkpoint（未传入则默认 false）
+    local load_checkpoint_format_IN="${13}"   # load_checkpoint_format（未传入则默认 ""）
+    local save_checkpoint_format_IN="${14}"      # save_checkpoint_format（未传入则默认 ""）
 
     # 默认值
     local MOE_GROUP_VAL=${MOE_GROUP_IN:-ep}
@@ -118,8 +118,8 @@ run_with_yaml() {
     local EP_DEG_VAL=${EP_DEG_IN:-1}
     local PP_DEG_VAL=${PP_DEG_IN:-1}
     local VPP_DEG_VAL=${VPP_DEG_IN:-1}
-    local UNIFIED_CKPT_VAL=${UNIFIED_CKPT_IN:-false}
-    local FLEX_CKPT_VAL=${FLEX_CKPT_IN:-false}
+    local load_checkpoint_format_VAL=${load_checkpoint_format_IN:-""}
+    local save_checkpoint_format_VAL=${save_checkpoint_format_IN:-""}
 
     local TEMP_CONFIG_FILE="/tmp/pretrain_config_$$.yaml"
 
@@ -240,34 +240,19 @@ trainer_args:
     moe_group: ${MOE_GROUP_VAL}
     from_scratch: 1
     enable_optimizer_timer: False
-    unified_checkpoint: ${UNIFIED_CKPT_VAL}
-    using_flex_checkpoint: ${FLEX_CKPT_VAL}
+    load_checkpoint_format: ${load_checkpoint_format_VAL}
+    save_checkpoint_format: ${save_checkpoint_format_VAL}
     aoa_config: {
           "aoa_statements": [
             "ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight -> ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight, fused_qkv_old, num_heads=20, num_key_value_groups=4",
-            "ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight.moment1_0 -> ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight.moment1_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
-            "ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight.moment2_0 -> ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
-            "ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight.w_0 -> ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
             "ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight -> ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight, fused_qkv_old, num_heads=20, num_key_value_groups=4",
-            "ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight.moment1_0 -> ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight.moment1_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
-            "ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight.moment2_0 -> ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight.moment2_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
-            "ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight.w_0 -> ernie.mtp_block.\$LAYER_ID.self_attn.qkv_proj.weight.w_0, fused_qkv_old, num_heads=20, num_key_value_groups=4",
 
             "ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight -> ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight, fused_ffn",
-            "ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight.moment1_0, fused_ffn",
-            "ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight.moment2_0, fused_ffn",
-            "ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.layers.\$LAYER_ID.mlp.up_gate_proj.weight.w_0, fused_ffn",
 
             "ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight -> ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight, fused_ffn",
-            "ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight.moment1_0 -> ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight.moment1_0, fused_ffn",
-            "ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight.moment2_0 -> ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight.moment2_0, fused_ffn",
-            "ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight.w_0 -> ernie.mtp_block.\$LAYER_ID.mlp.up_gate_proj.weight.w_0, fused_ffn",
 
             "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight, fused_ffn",
-            "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment1_0, fused_ffn",
-            "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.moment2_0, fused_ffn",
-            "ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0 -> ernie.layers.1.mlp.shared_experts.up_gate_proj.weight.w_0, fused_ffn",
           ]
         }
 EOF
@@ -295,7 +280,7 @@ export CUDA_VISIBLE_DEVICES=0,1
 run_with_yaml "$case_temp0_out_dir" "$case_temp0_log_dir" "" 6 5 \
     "${R0_MOE_GROUP}" "${R0_SHARDING_PARALLEL_DEGREE}" "${R0_DATA_PARALLEL_DEGREE}" \
     "${R0_TENSOR_PARALLEL_DEGREE}" "${R0_EXPERT_PARALLEL_DEGREE}" "${R0_PIPELINE_PARALLEL_DEGREE}" \
-    "${R0_VIRTUAL_PP_DEGREE}" "${R0_UNIFIED_CKPT}" "${R0_FLEX_CKPT}"
+    "${R0_VIRTUAL_PP_DEGREE}" "${R0_load_checkpoint_format}" "${R0_save_checkpoint_format}"
 
 
 
@@ -306,7 +291,7 @@ export CUDA_VISIBLE_DEVICES=0,1
 run_with_yaml "$case_temp1_out_dir" "$case_temp1_log_dir" "" 6 5 \
     "${R1_MOE_GROUP}" "${R1_SHARDING_PARALLEL_DEGREE}" "${R1_DATA_PARALLEL_DEGREE}" \
     "${R1_TENSOR_PARALLEL_DEGREE}" "${R1_EXPERT_PARALLEL_DEGREE}" "${R1_PIPELINE_PARALLEL_DEGREE}" \
-    "${R1_VIRTUAL_PP_DEGREE}" "${R1_UNIFIED_CKPT}" "${R1_FLEX_CKPT}"
+    "${R1_VIRTUAL_PP_DEGREE}" "${R1_load_checkpoint_format}" "${R1_save_checkpoint_format}"
 
 export FLAGS_shard_bypass_dygraph_optimizer=1
 
@@ -317,7 +302,7 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 run_with_yaml "$case_temp2_out_dir" "$case_temp2_log_dir" "${case_temp1_out_dir}/checkpoint-5" 6 6 \
     "${R2_MOE_GROUP}" "${R2_SHARDING_PARALLEL_DEGREE}" "${R2_DATA_PARALLEL_DEGREE}" \
     "${R2_TENSOR_PARALLEL_DEGREE}" "${R2_EXPERT_PARALLEL_DEGREE}" "${R2_PIPELINE_PARALLEL_DEGREE}" \
-    "${R2_VIRTUAL_PP_DEGREE}" "${R2_UNIFIED_CKPT}" "${R2_FLEX_CKPT}"
+    "${R2_VIRTUAL_PP_DEGREE}" "${R2_load_checkpoint_format}" "${R2_save_checkpoint_format}"
 
 
 ########################################
@@ -348,7 +333,7 @@ fi
 
 echo "开始转换为 safetensors..."
 if [ -d "$SRC_CKPT_6_A" ]; then
-    python /home/ERNIE/examples/pre-training/transform_from_distcp_to_safetensors.py \
+    python -m paddle.distributed.launch --gpus "0,1" /home/ERNIE/examples/pre-training/transform_from_distcp_to_safetensors.py \
         "$SRC_CKPT_6_A" \
         "$MERGE_OUT_5" \
         "$CONFIG_FLAG_A"
@@ -357,7 +342,7 @@ else
 fi
 
 if [ -d "$SRC_CKPT_6_B" ]; then
-    python /home/ERNIE/examples/pre-training/transform_from_distcp_to_safetensors.py \
+    python -m paddle.distributed.launch --gpus "0,1" /home/ERNIE/examples/pre-training/transform_from_distcp_to_safetensors.py \
         "$SRC_CKPT_6_B" \
         "$MERGE_OUT_6" \
         "$CONFIG_FLAG_B"

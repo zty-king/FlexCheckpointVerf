@@ -238,7 +238,8 @@ trainer_args:
     moe_group: ${MOE_GROUP_VAL}
     from_scratch: 1
     enable_optimizer_timer: False
-    using_flex_checkpoint: true
+    load_checkpoint_format: "flex_checkpoint" 
+    save_checkpoint_format: "flex_checkpoint"
     aoa_config: {
         "aoa_statements": [
         "ernie.layers.0.input_layernorm.weight -> ernie.layers.0.input_layernorm_rename.weight"

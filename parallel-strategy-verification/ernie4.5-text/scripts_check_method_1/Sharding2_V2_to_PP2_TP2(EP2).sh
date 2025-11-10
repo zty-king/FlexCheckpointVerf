@@ -244,7 +244,8 @@ trainer_args:
     moe_group: ${MOE_GROUP_VAL}
     from_scratch: 1
     enable_optimizer_timer: False
-    using_flex_checkpoint: True
+    load_checkpoint_format: "flex_checkpoint" 
+    save_checkpoint_format: "flex_checkpoint"
     aoa_config: {
       "aoa_statements": [
         "ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight -> ernie.layers.\$LAYER_ID.self_attn.qkv_proj.weight, fused_qkv_old, num_heads=20, num_key_value_groups=4",
